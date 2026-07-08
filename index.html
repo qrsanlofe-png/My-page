@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض أعمال المبرمج المحترف</title>
+    
+    <!-- خط Cairo الفخم من جوجل -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* التنسيقات الأساسية وتصفير الهوامش */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0b0f19; /* خلفية ليلية داكنة وفخمة جداً */
+            color: #f1f5f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 1. تصميم شريط التنقل العلوي النظيف */
+        .portfolio-nav {
+            display: flex;
+            justify-content: center; /* وضع العنوان في المنتصف بدقة */
+            align-items: center;
+            background-color: #111827;
+            padding: 18px 30px;
+            border-bottom: 1px solid #1f2937;
+        }
+
+        .portfolio-nav .dev-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #38bdf8; /* لون أزرق نيون جذاب */
+            letter-spacing: 0.5px;
+        }
+
+        /* 2. تصميم قسم التعريف الشخصي (Hero) */
+        .intro-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: radial-gradient(circle at top, #1e293b 0%, #0b0f19 100%);
+        }
+
+        .avatar {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 3s ease-in-out infinite; /* حركة قفز خفيفة */
+        }
+
+        .intro-section h1 {
+            font-size: 34px;
+            font-weight: 900;
+            margin: 0 0 15px 0;
+            color: #ffffff;
+        }
+
+        .intro-section p {
+            font-size: 16px;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            line-height: 1.8;
+        }
+
+        /* شارات Mهارات التقنية */
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .skills-tags span {
+            background-color: #1e293b;
+            color: #38bdf8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid #334155;
+        }
+
+        /* 3. تصميم قسم شبكة المشاريع الاحترافية */
+        .projects-section {
+            padding: 60px 20px;
+            background-color: #111827;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        /* حاوية المشاريع بنظام Flexbox المتجاوب */
+        .portfolio-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+        }
+
+        /* تصميم كرت المشروع المطور */
+        .p-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 16px;
+            padding: 30px;
+            flex: 1 1 340px;
+            max-width: 380px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .p-card:hover {
+            transform: translateY(-8px);
+            border-color: #38bdf8;
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.08);
+        }
+
+        /* تمييز كرت صفحة السماعات (المنتج الأكثر طلباً) */
+        .p-card.featured-p {
+            border: 1px solid #f97316; /* إطار برتقالي فخم */
+        }
+        .p-card.featured-p:hover {
+            border-color: #f97316;
+            box-shadow: 0 15px 30px rgba(249, 115, 22, 0.08);
+        }
+
+        .p-badge {
+            position: absolute;
+            top: -14px;
+            right: 20px;
+            background-color: #f97316;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .p-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .p-card h3 {
+            font-size: 19px;
+            margin: 0 0 12px 0;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .p-card p {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1; /* لتتساوي أطوال النصوص داخل الكروت */
+        }
+
+        /* أزرار المعاينة الحية للمشاريع */
+        .view-project-btn {
+            display: block;
+            text-align: center;
+            background-color: #0284c7;
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .view-project-btn:hover {
+            background-color: #0369a1;
+        }
+
+        .p-card.featured-p .view-project-btn {
+            background-color: #f97316;
+        }
+        .p-card.featured-p .view-project-btn:hover {
+            background-color: #ea580c;
+        }
+
+        /* 4. تصميم تذييل الصفحة (Footer) */
+        .p-footer {
+            background-color: #0b0f19;
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 1px solid #1f2937;
+        }
+
+        .p-footer p {
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .p-footer .copyright {
+            color: #475569;
+            font-size: 12px;
+        }
+
+        /* أنيميشن حركة الافتار */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. شريط علوي بسيط ونظيف بدون زر واتساب -->
+    <nav class="portfolio-nav">
+        <div class="dev-name">بوابة المطور المحترف</div>
+    </nav>
+
+    <!-- 2. قسم التعريف الشخصي (Hero) -->
+    <header class="intro-section">
+        <div class="avatar">👨‍💻</div>
+        <h1>مرحباً، أنا مطور واجهات ويب محترف</h1>
+        <p>متخصص في بناء وتصميم صفحات الهبوط والمتاجر الإلكترونية المتجاوبة والمتحركة التي تزيد من مبيعات الشركات والأفراد وتضمن نجاح حضورهم الرقمي.</p>
+        <div class="skills-tags">
+            <span>HTML5</span>
+            <span>CSS3 المتقدم</span>
+            <span>JavaScript</span>
+            <span>Flexbox & Grid</span>
+            <span>التصميم المتجاوب (Responsive)</span>
+        </div>
+    </header>
+
+    <!-- 3. قسم معرض المشاريع الحية -->
+    <main class="projects-section">
+        <h2 class="section-heading">أحدث مشاريعي الاحترافية</h2>
+        <p class="section-sub">جميع المشاريع أدناه حية ومباشرة وتم برمجتها بأعلى معايير الجودة والتجاوب</p>
+        
+        <div class="portfolio-grid">
+            
+            <!-- المشروع الأول: المتجر الإلكتروني -->
+            <div class="p-card">
+                <div class="p-icon">🛒</div>
+                <h3>موقع الشركة الذكية ومتجر رقمي</h3>
+                <p>صفحة هبوط متكاملة لشركة خدمات رقمية تتضمن كروت خدمات متجاوبة، خطوط جوجل الاحترافية، وسلة مشتريات ذكية تحسب وتحدث المنتجات تفاعلياً في الوقت الفعلي.</p>
+                <a href="https://qrsanlofe-png.github.io/Xxz/" class="view-project-btn" target="_blank">معاينة المشروع المباشر 🔗</a>
+            </div>
+
+            <!-- المشروع الثاني: صفحة هبوط السماعات -->
+            <div class="p-card featured-p">
+                <div class="p-badge">الأكثر طلباً للشركات 🔥</div>
+                <div class="p-icon">🎧</div>
+                <h3>صفحة هبوط تسويقية لمنتج واحد</h3>
+                <p>صفحة بيع مباشر (C.O.D) احترافية لسماعات ProSound الفخمة، تحتوي على عداد تنازلي حي ومتحرك لخلق حالة العجلة التسويقية، ونموذج طلب سريع متوافق مع شاشات الهواتف.</p>
+                <a href="https://qrsanlofe-png.github.io/prosound-landing/" class="view-project-btn" target="_blank">معاينة المشروع المباشر 🔗</a>
+            </div>
+
+            <!-- المشروع الثالث: تطبيق المهام -->
+            <div class="p-card">
+                <div class="p-icon">📝</div>
+                <h3>تطبيق إدارة المهام التفاعلي</h3>
+                <p>تطبيق ويب متطور لتنظيم المهام اليومية، يتيح إضافة، شطب، وحذف المهام بحركات ناعمة، ومزود بميزة الحفظ الذكي في ذاكرة الهاتف العميقة (Local Storage) لضمان عدم ضياع البيانات.</p>
+                <a href="https://qrsanlofe-png.github.io/Mham/" class="view-project-btn">معاينة نموذج التطبيق 🔗</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 4. تذييل الصفحة اللطيف -->
+    <footer class="p-footer">
+        <p>جاهز لتحويل فكرتك القادمة إلى واقع برمي فخم؟ تواصل معي الآن في منصة مستقل وابدأ مشروعك بثقة.</p>
+        <p class="copyright">&copy; 2026 | تم بناء المعرض بشغف بالكامل من الهاتف 🚀</p>
+    </footer>
+
+</body>
+</html>
